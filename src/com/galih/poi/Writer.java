@@ -1,5 +1,9 @@
-package main;
-
+package com.galih.poi;
+/*
+ * Author : Muchamad Galih Anggara
+ * Name : POI Writer Utility
+ * Description : Writes or replaces excel file to specific sheet
+ * */
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -51,6 +55,10 @@ public class Writer {
 		this.region = new int[] {rowStart, cellStart, cellEnd};
 	}
 	
+	public int[] getRegion(){
+		return this.region;
+	}
+	
 	public void Write(String[] datas) throws IOException {
 		File file = new File(filePath + "\\" + fileName);
 		FileInputStream fis = new FileInputStream(file);
@@ -72,7 +80,7 @@ public class Writer {
 			region[2] = sheet.getRow(0).getLastCellNum();
 		}
 		Row nr = sheet.createRow(rowCount + 1);
-		for(int i = region[1]; i < region[2]; i++) {
+		for(int i = region[1]; i <= region[2]; i++) {
 				Cell cell = nr.createCell(i);
 				cell.setCellValue(datas[i-region[1]]);
 		}
